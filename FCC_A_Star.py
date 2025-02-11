@@ -99,7 +99,7 @@ class fcc_a:
         )
 
         # 設定 FCC_SCALE 據 grid_scale 調整：當 grid_scale=0.1 則 FCC_SCALE 為 10
-        self.fcc_scale = 10 * (grid_scale / 0.1)
+        self.fcc_scale = 8 * (grid_scale / 0.1)
 
         # 定義 A* 搜索區域（以讓路船起點、目標與直行船起點為依據，加上 margin）
         xs = [self.yield_pos[0], self.yield_goal[0], self.direct_pos[0]]
@@ -414,7 +414,7 @@ if __name__ == "__main__":
     # 測試參數：
     # 這邊可以調整船的位置，例如從 (50,50) 調整到 (100,100)
     # ---------------------------
-    ship1_speed = 2
+    ship1_speed = 5
     ship1_pos = (50, 50)  # 可改為 (50,50) 或其他
     ship2_speed = 5
     ship2_pos = (0, 0)
