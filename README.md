@@ -32,11 +32,12 @@ planner = fcc_a(
 direct_path, yield_path = planner.calculate_path()
 ```
 
-## 直航船速度-時間圖（V-T）
+## 直航船路徑預測:速度-時間圖（V-T）
+兩船資料輸入後，預期:
+- 直航船維持 **恆速**，但在接近目標時 **線性減速** 停止，如下面v-t圖表示(這是理想的預測，可能需要更具實際情況修改)
+- 讓路船則是以輸入時狀態的速度行駛於規劃的路徑上
 
-直航船維持 **恆速**，但在接近目標時 **線性減速** 停止：
-
-![直航船V-T圖](picture/Predict_V-T_Diagram.png)
+![直航船v-t圖](picture/Predict_V-T_Diagram.png)
 
 ## `calculate_path()` 方法輸出
 
@@ -52,7 +53,6 @@ direct_path, yield_path = planner.calculate_path()
 - **Matplotlib 圖表「FCC vs. 步數」與「航向 vs. 步數」**
 
 📌 **範例執行畫面：**  
-（請手動截圖測試畫面，並放置於此處，例如 `test_run.png`）  
 ![腳本模式執行示意圖](picture/TestMod.png)
 
 ## 參數調整
