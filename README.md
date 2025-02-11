@@ -16,7 +16,6 @@ A ship path planning algorithm using FCC-A\* with visualization in Pygame.
 - **可視化**：作為腳本執行時，模組將顯示：
   - Pygame 視窗，展示網格上的船舶路徑（包含讓路船的標示格與逐步箭頭）。
   - 內嵌 Matplotlib 圖表，顯示「FCC vs. 步數」與「航向 vs. 步數」。
-- **Python 風格**：程式碼遵循標準 Python 編碼規範。
 
 ## 使用範例
 
@@ -103,11 +102,11 @@ direct_path, yield_path = planner.calculate_path()
   - `SECTER_RADIUS_RIGHT`
   - `SECTER_RADIUS_BACK`
 - **fcc_scale**：控制 FCC 成本的權重。
-- **k_heading**：滑動窗口大小，用於 `calculate_path` 方法計算讓路船航向。
+- **k_heading**：滑動窗口大小，用於計算讓路船航向角度。
 
 ## 作為腳本運行
 
-若直接執行此模組（如 `python FCC_A.py`），它將執行內建測試：
+若直接執行此模組(即運行`python FCC_A.py`)，它將執行內建測試：
 
 - 計算兩艘船的路徑。
 - 開啟 Pygame 視窗，顯示網格上的船舶路徑：
@@ -126,13 +125,6 @@ direct_path, yield_path = planner.calculate_path()
   - `h`：讓路船的當前航向。
     啟發式函數結合了八向距離與 FCC 成本。
 
-- **Python 風格**  
-  程式碼遵循 PEP8 規範，並具清晰的函數分隔與內嵌註解。
-
-## 授權
-
-本專案「按現狀」提供，無任何擔保。您可自由使用、修改與分發。
-
 ## 聯絡方式
 
-如有問題或建議，請聯繫 [您的聯絡資訊]。
+如有問題或建議，請聯繫 [wyattsheu@gmail.com]。
