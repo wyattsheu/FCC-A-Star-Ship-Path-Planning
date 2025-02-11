@@ -36,7 +36,7 @@ direct_path, yield_path = planner.calculate_path()
 
 直航船維持 **恆速**，但在接近目標時 **線性減速** 停止：
 
-![直航船V-T圖](/mnt/data/VT_Plot.png)
+![直航船V-T圖](picture/Predict_V-T_Diagram.png)
 
 ## `calculate_path()` 方法輸出
 
@@ -53,7 +53,7 @@ direct_path, yield_path = planner.calculate_path()
 
 📌 **範例執行畫面：**  
 （請手動截圖測試畫面，並放置於此處，例如 `test_run.png`）  
-![腳本模式執行示意圖](test_run.png)
+![腳本模式執行示意圖](picture/TestMod.png)
 
 ## 參數調整
 
