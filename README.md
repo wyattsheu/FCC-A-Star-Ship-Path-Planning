@@ -16,7 +16,7 @@ FCC-A\* 結合 **A\*** 搜索與 **GOODWIN** 船舶模型的模糊碰撞成本 (
 ### 1. 匯入 `fcc_a` 類別
 
 ```python
-from FCC_A import fcc_a
+from FCC_A_Star import fcc_a
 
 planner = fcc_a(
     ship1_speed=2,
@@ -47,7 +47,7 @@ direct_path, yield_path = planner.calculate_path()
 
 ## 腳本模式（測試功能）
 
-執行 `python FCC_A.py`，可視化：
+執行 `python FCC_A.py`，可以做簡單的測試：
 
 - **Pygame 顯示船舶航線與步數標示**
 - **Matplotlib 圖表「FCC vs. 步數」與「航向 vs. 步數」**
