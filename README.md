@@ -1,69 +1,70 @@
-# FCC-A\* 航行路徑規劃器
+# 多船路徑規劃與 FCC-A*
 
-## 概述
+本存儲庫包含一個基於 FCC-A* 演算法的多船路徑規劃系統的實現。該系統旨在計算多個船隻在共用環境中航行的無碰撞路徑。實現包括路徑平滑和使用 `pygame` 進行視覺化的選項。
 
-FCC-A\* 結合 **A\*** 搜索與 **GOODWIN** 船舶模型的模糊碰撞成本 (FCC)，為 **讓路船**（需避讓）規劃安全航線，並考慮 **直航船**（優先行駛）之預測路徑。
+## 文件概覽
 
-## 特色
+- **`multi_ship_planner_v1.py`**：多船路徑規劃演算法的核心實現，包括路徑衝突檢測和平滑技術。
+- **`ship_navigation_v1.py`**：提供基於 FCC-A* 計算和管理船舶路徑的介面。
+- **`plain_animation.py`**：使用 `pygame` 進行視覺化，可進行步進式路徑視覺化和平滑動畫船舶移動。
 
-- **FCC-A\*** 搜索，考慮碰撞風險。
-- **模糊碰撞成本 (FCC)**，融合距離與角度計算風險。
-- **直航船恆速，接近目標時減速停靠**。
-- **可視化顯示** 航線與碰撞成本變化。
+## 安裝
 
-## 使用方式
+本專案需要 Python 3 及以下依賴項：
 
-### 1. 匯入 `fcc_a` 類別
-
-```python
-from FCC_A_Star import fcc_a
-
-planner = fcc_a(
-    ship1_speed=2,
-    ship1_pos=(50, 50),
-    ship2_speed=5,
-    ship2_pos=(0, 0),
-    ship1_goal=(0, 0),
-    ship2_goal=(50, 50),
-    yield_ship=1,
-    grid_scale=1
-)
-
-direct_path, yield_path = planner.calculate_path()
+```sh
+pip install numpy scipy pygame matplotlib
 ```
 
-## 直航船路徑預測:速度-時間圖（V-T）
-兩船資料輸入後，預期:
-- 直航船維持 **恆速**，但在接近目標時 **線性減速** 停止，如下面v-t圖表示(這是理想的預測，可能需要更具實際情況修改)
-- 讓路船則是以輸入時狀態的速度行駛於規劃的路徑上
+確保 `plain_animation.py` 所在目錄中包含 `ship.png`（一個俯視船隻的圖片）。
 
-![直航船v-t圖](picture/Predict_V-T_Diagram.png)
+## 使用方法
 
-## `calculate_path()` 方法輸出
+### 運行視覺化
 
-- `direct_path`：直航船預測路徑 (x, y) (m)。
-- `yield_path`：讓路船計劃路徑 (x, y) (m)。
-- `planner.analysis`：包含步數、航向、FCC 風險值。
+要啟動視覺化（支援步進模式和動畫模式），運行：
 
-## 腳本模式（測試功能）
+```sh
+python plain_animation.py
+```
 
-執行 `python FCC_A.py`，可以做簡單的測試：
+按 `Shift` 可在 **步進模式** 和 **動畫模式** 之間切換。
+按 `Space` 可暫停/恢復動畫。
 
-- **Pygame 顯示船舶航線與步數標示**
-- **Matplotlib 圖表「FCC vs. 步數」與「航向 vs. 步數」**
+### 導入多船路徑規劃
 
-📌 **範例執行畫面：**  
-![腳本模式執行示意圖](picture/TestMod.png)
+可以在自己的 Python 腳本中使用 `multi_ship_planning` 函數，如下所示：
 
-## 參數調整
+```python
+from ship_navigation_v1 import multi_ship_planning
 
-可調整的參數：
+# 定義多個船隻的起始位置和目標
+ships_data = [
+    {"id": "ShipA", "pos": (2.2, 1.5), "goal": (17.4, 9.7)},
+    {"id": "ShipB", "pos": (5.1, 1.5), "goal": (15.3, 8.7)},
+    {"id": "ShipC", "pos": (7.9, 1.5), "goal": (14.7, 12.4)},
+]
 
-- **GOODWIN 模型**：
-  - `SECTER_RADIUS_LEFT`、`SECTER_RADIUS_RIGHT`、`SECTER_RADIUS_BACK`
-- **FCC 權重**：`fcc_scale` 控制風險影響力。
-- **航向計算**：`k_heading` 影響讓路船方向估算。
+# 運行多船路徑規劃
+results = multi_ship_planning(
+    ships=ships_data,
+    safe_distance=1.0,  # 船隻之間的最小安全距離
+    grid_scale=0.2,  # 網格解析度
+    smoothing_method="bezier",  # 可選："none", "moving_average", "bezier"
+)
 
-## 聯絡方式
+# 輸出每艘船的路徑
+for ship_id, data in results.items():
+    print(f"{ship_id} 路徑: {data['path']}")
+    print(f"{ship_id} 航向: {data['headings']}")
+```
 
-📩 若有問題或建議，請聯繫 [wyattsheu@gmail.com]。
+## 功能特點
+
+- **多船路徑規劃**：計算多個船隻的安全無碰撞航線。
+- **路徑衝突解決**：動態檢測和解決潛在衝突。
+- **路徑平滑**：支援不同的平滑方法（`moving_average`, `bezier`）。
+- **即時視覺化**：使用 `pygame` 顯示路徑和動畫。
+- **用戶交互**：可交互地切換視覺化模式和調整路徑平滑方式。
+
+
