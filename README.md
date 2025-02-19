@@ -8,15 +8,7 @@
 - **`ship_navigation_v1.py`**：提供基於 FCC-A* 計算和管理船舶路徑的介面。
 - **`plain_animation.py`**：使用 `pygame` 進行視覺化，可進行步進式路徑視覺化和平滑動畫船舶移動。
 
-## 安裝
 
-本專案需要 Python 3 及以下依賴項：
-
-```sh
-pip install numpy scipy pygame matplotlib
-```
-
-確保 `plain_animation.py` 所在目錄中包含 `ship.png`（一個俯視船隻的圖片）。
 
 ## 使用方法
 
